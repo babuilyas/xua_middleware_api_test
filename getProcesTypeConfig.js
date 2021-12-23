@@ -4,21 +4,23 @@ const noderfc = require("node-rfc");
 var client = new noderfc.Client({ ...con });
 
 let struct1 = {
-  GUID: Buffer.from("THIS IS A TEST"),
-  PROJECT_ID: "",
-  PRO_TYPE: "",
+  LANGU_ISO: "",
   LANGU: "",
-  TEXT1: "",
-  PLANSTARTDATE: "",
-  PLANFINISHDATE: "",
-  STARTDATE_IS_CALC: "",
-  FINISHDATE_IS_CALC: "",
-  PROJECT_KIND: "",
-  IS_MASTER: "",
-  ISTAT: "",
-  ISTAT_2: "",
-  ESTAT: "",
-  STATTXT: "",
+  PROCESS_TYPE: "",
+  STAT_PROF: "",
+  STAT_PROF_DESCR: "",
+  USR_STATUS: "",
+  USR_STATUS_DESCR_04: "",
+  USR_STATUS_DESCR: "",
+  LTEXT: "",
+  INIST: "",
+  US_ST_NUMB: "",
+  HSONR: "",
+  NSONR: "",
+  LINEP: "",
+  STATP: "",
+  BERSL: "",
+  CRM_VRGNG: "",
 };
 let tab1 = [struct1];
 
@@ -26,8 +28,9 @@ let tab1 = [struct1];
   try {
     await client.connect();
     client
-      .call("ZXUA_FB_PROJECT_GETLIST", {
-        RT_PROJECTS: tab1,
+      .call("ZXUA_CM_PROCTYPE_GETDETAIL", {
+        IV_PROCESSTYPE: "S1IT",
+        ET_STATUS_SCHEMA: tab1,
       })
       .then(function (result) {
         console.log(result);
