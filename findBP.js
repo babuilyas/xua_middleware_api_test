@@ -3,16 +3,22 @@ const noderfc = require("node-rfc");
 
 var client = new noderfc.Client({ ...con });
 
+let IS_PARTNER = {
+  FIRST_NAME: "WASIF",
+  LAST_NAME: "ALI",
+  USER_NAME: "",
+  E_MAIL: "",
+};
+
+let EV_BP = "";
+
 (async () => {
   try {
     await client.connect();
     client
-      .call("RFC_PING_AND_WAIT", {
-        SECONDS: 1,
-        BUSY_WAITING: "",
-        FORW: "",
-        FORW_SECONDS: 0,
-        FORW_BUSY_WAITING: "",
+      .call("ZXUA_SM_PARTNER_FIND", {
+        IS_PARTNER: IS_PARTNER,
+        EV_BP: EV_BP,
       })
       .then(function (result) {
         console.log(result);

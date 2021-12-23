@@ -2,6 +2,7 @@
   "name": "xua_middleware_api_test",
   "version": "1.0.0",
   "description": "",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +11,7 @@
   "author": "Muhammad <ilyas.com.pk@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "node-rfc": "^2.5.1"
+    "node-rfc": "^2.5.1",
+    "uuid-buffer": "^1.0.3"
   }
 }
