@@ -1,0 +1,10 @@
+
+**** Log file opened at 2021-12-22 16:48:01.467639 UTC+05:00 (Pakistan Standard Time), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 8, Compiled on Apr 17 2021 03:23:42
+ CPIC library: 753.2020.03.230 version 3, NI library: 40, Kernel Release: 753 Patch Level 814
+ Current working directory: C:\Users\m.ilyas\Desktop\craig-slm-inte\Test_api, Program: node
+ Hardware: PC with Windows NT 4x AMD64 Level 6 (Mod 142 Step 9), Operating_system: Windows NT 10.0
+ Hostname: DESKTOP-3J4CPO4, IP address: 192.168.1.191, IPv6 address: fe80::c420:b191:df6b:85be
+
+2021-12-22 16:48:01.467864 [22356] >> Info entry
+	Did find config file C:\Users\m.ilyas\Desktop\craig-slm-inte\Test_api\sapnwrfc.ini.
