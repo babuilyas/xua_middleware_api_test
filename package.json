@@ -11,7 +11,6 @@
   "author": "Muhammad <ilyas.com.pk@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "node-rfc": "^2.5.1",
-    "uuid-buffer": "^1.0.3"
+    "node-rfc": "^2.5.1"
   }
 }

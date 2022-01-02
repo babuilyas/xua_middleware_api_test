@@ -29,7 +29,7 @@ let tab1 = [struct1];
     await client.connect();
     client
       .call("ZXUA_CM_PROCTYPE_GETDETAIL", {
-        IV_PROCESSTYPE: "S1IT",
+        IV_PROCESSTYPE: "SMCR",
         ET_STATUS_SCHEMA: tab1,
       })
       .then(function (result) {

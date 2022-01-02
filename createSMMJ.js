@@ -4,8 +4,8 @@ const noderfc = require("node-rfc");
 var client = new noderfc.Client({ ...con });
 
 let input = {
-  IV_PROCESSTYPE: "SMCR",
-  IV_SHORTTEXT: "TEST RFC SMCR FROM NODE",
+  IV_PROCESSTYPE: "SMMJ",
+  IV_SHORTTEXT: "TEST NC SMMJ FROM NODE",
   IV_RELEASE_CRM_GUID: Buffer.from("000C29598DA51EDC98CA64E5B452BE88", "hex"),
   IV_SOLDTO: "00000291", // trim first two zeros
   IV_CHANGEMANAGER: "0000000112",
