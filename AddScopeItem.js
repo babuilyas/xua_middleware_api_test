@@ -3,34 +3,18 @@ const noderfc = require("node-rfc");
 
 var client = new noderfc.Client({ ...con });
 
-let struct1 = {
-  LANGU_ISO: "",
-  LANGU: "",
-  PROCESS_TYPE: "",
-  STAT_PROF: "",
-  STAT_PROF_DESCR: "",
-  USR_STATUS: "",
-  USR_STATUS_DESCR_04: "",
-  USR_STATUS_DESCR: "",
-  LTEXT: "",
-  INIST: "",
-  US_ST_NUMB: "",
-  HSONR: "",
-  NSONR: "",
-  LINEP: "",
-  STATP: "",
-  BERSL: "",
-  CRM_VRGNG: "",
-};
-let tab1 = [struct1];
+
+// prettier-ignore
+
 
 (async () => {
   try {
     await client.connect();
     client
-      .call("ZXUA_CM_PROCTYPE_GETDETAIL", {
-        IV_PROCESSTYPE: "S1IT",
-        ET_STATUS_SCHEMA: tab1,
+      .call("ZXUA_ADD_SCOPE_ITEM", {
+        IV_HEADER_GUID: Buffer.from("59290c00a58ddc1e9da2c910409a55fb", "hex"),
+        IV_PROCESS_TYPE: "S1MJ",
+        IV_SHORT_TEXT: "Test S1MJ to S1IT",
       })
       .then(function (result) {
         console.log(result);

@@ -3,34 +3,21 @@ const noderfc = require("node-rfc");
 
 var client = new noderfc.Client({ ...con });
 
-let struct1 = {
-  LANGU_ISO: "",
-  LANGU: "",
-  PROCESS_TYPE: "",
-  STAT_PROF: "",
-  STAT_PROF_DESCR: "",
-  USR_STATUS: "",
-  USR_STATUS_DESCR_04: "",
-  USR_STATUS_DESCR: "",
-  LTEXT: "",
-  INIST: "",
-  US_ST_NUMB: "",
-  HSONR: "",
-  NSONR: "",
-  LINEP: "",
-  STATP: "",
-  BERSL: "",
-  CRM_VRGNG: "",
+let input = {
+  IV_PROCESS_TYPE: "S1BR",
+  IV_SHORT_TEXT: "TEST RFC S1BR",
 };
-let tab1 = [struct1];
+let EV_GUID = Buffer.from("THIS IS A TEST");
+let EV_OBJECT_ID = "";
 
 (async () => {
   try {
     await client.connect();
     client
-      .call("ZXUA_CM_PROCTYPE_GETDETAIL", {
-        IV_PROCESSTYPE: "S1IT",
-        ET_STATUS_SCHEMA: tab1,
+      .call("ZXUA_CREATE_PROCESS_TYPE", {
+        ...input,
+        EV_GUID: EV_GUID,
+        EV_OBJECT_ID: EV_OBJECT_ID,
       })
       .then(function (result) {
         console.log(result);
