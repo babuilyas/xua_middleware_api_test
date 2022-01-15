@@ -9,6 +9,7 @@ NW RFC Library: SDK variant, Release 750 Patch Level 8, Compiled on Apr 17 2021 
 2021-12-22 16:48:01.467864 [22356] >> Info entry
 	Did find config file C:\Users\m.ilyas\Desktop\craig-slm-inte\Test_api\sapnwrfc.ini.
 
+<<<<<<< HEAD
 **** Log file opened at 2022-01-14 22:55:15.981128 UTC+05:00 (Pakistan Standard Time), Encoding UTF-8
 NW RFC Library: SDK variant, Release 750 Patch Level 8, Compiled on Apr 17 2021 03:23:42
  CPIC library: 753.2020.03.230 version 3, NI library: 40, Kernel Release: 753 Patch Level 814
@@ -50,3 +51,28 @@ ERRNO       10054
 ERRNO TEXT  WSAECONNRESET: Connection reset by peer
 COUNTER     3
 ]
+=======
+**** Log file opened at 2022-01-12 17:02:33.380393 UTC+05:00 (Pakistan Standard Time), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 8, Compiled on Aug 14 2021 15:29:58
+ CPIC library: 753.2021.05.10 version 3, NI library: 40, Kernel Release: 753 Patch Level 829
+ Current working directory: D:\Work\Xcelon Sap\Code\XUA_Node_Api, Program: node
+ Hardware: PC with Windows NT 12x AMD64 Level 6 (Mod 158 Step 10), Operating_system: Windows NT 10.0
+ Hostname: G7, IP address: 192.168.18.12, IPv6 address: fe80::b93e:997b:d411:1ae5
+
+2022-01-12 17:02:33.476152 [04488] >> Error entry
+	[Handle: 1643573789968	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host G7 with Unicode
+ERROR       timeout occured
+TIME        Wed Jan 12 17:02:33 2022
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -5
+MODULE      D:/depot/bas/753_COR/src/base/ni/nibuf.cpp
+LINE        4717
+DETAIL      NiBufIConnect: route connect
+            '/H/125.209.118.234/H/172.16.0.185/H/192.168.64.168' timeout
+COUNTER     2
+
+>>>>>>> 192455a4e0da61e41cd95c46ddd6426afae6acd2
