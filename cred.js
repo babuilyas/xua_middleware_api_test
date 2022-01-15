@@ -6,4 +6,6 @@ exports.con = {
   SAPROUTER: "/H/125.209.118.234/H/172.16.0.185",
   USER: "PS-WASIF",
   PASSWD: "Password123",
+  // USER: "ILYAS",
+  // PASSWD: "",
 };

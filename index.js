@@ -1,8 +1,11 @@
 const con = require("./cred.js").con;
 const noderfc = require("node-rfc");
+const faker = require("@faker-js/faker");
 
 var client = new noderfc.Client({ ...con });
 
+console.log(faker.vehicle);
+return;
 (async () => {
   try {
     await client.connect();

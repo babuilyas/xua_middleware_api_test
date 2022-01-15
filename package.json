@@ -5,12 +5,16 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "abap": "abap call slm ZXUA_ADD_PARTNER ZXUA_ADD_PARTNERS ZXUA_ADD_SCOPE_ITEM ZXUA_CHANGE_STATUS ZXUA_CHANGE_STATUS2 ZXUA_CREATE_PROCESS_TYPE ZXUA_GET_SCOPE_ITEM ZXUA_SET_APPROVED ZXUA_SET_CHANGE_CYCLE ZXUA_SET_PROJECT ZXUA_SET_PROJECT_WAVE ZXUA_SET_WP_CLASSIFICATION ZXUA_UPDATE_PRIORITY ZXUA_GET_OBJECT_ID ZXUA_GET_STATUS ZXUA_GET_PARTNERS ZXUA_GET_GUID -s"
   },
   "keywords": [],
   "author": "Muhammad <ilyas.com.pk@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "node-rfc": "^2.5.1"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^5.5.3"
   }
 }
