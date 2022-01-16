@@ -29,11 +29,20 @@ let tab1 = [struct1];
     await client.connect();
     client
       .call("ZXUA_CM_PROCTYPE_GETDETAIL", {
-        IV_PROCESSTYPE: "S1IT",
+        IV_PROCESSTYPE: "S1CG",
         ET_STATUS_SCHEMA: tab1,
       })
       .then(function (result) {
         console.log(result);
+        result.ET_STATUS_SCHEMA.map((a) =>
+          console.log(
+            a.USR_STATUS,
+            ",",
+            a.USR_STATUS_DESCR_04,
+            ",",
+            a.USR_STATUS_DESCR
+          )
+        );
       })
       .catch(function (err) {
         console.log(err);
