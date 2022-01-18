@@ -1,7 +1,41 @@
-const con = require("./cred.js").con;
-const noderfc = require("node-rfc");
+//
+// ZXUA_FB_PROJECT_GETDETAIL var: 4  struct: 0  table: 2  exception: 0
+//
+// abap.js 2.3.1 at: 2022-01-17 21:04:42
+//
 
-var client = new noderfc.Client({ ...con });
+// prettier-ignore
+const parameters = {
+
+// IMPORT PARAMETERS
+
+PROJECT_GUID           : Buffer.alloc(~size), // RAW (16) Globally Unique Identifier
+
+// TABLE PARAMETERS
+
+// ET_PHASE_VH         :           [], // ZXUA_TS_PHASE_VH TT Phase ValueSet
+// ET_SPRINT_DUE_DATES :           [], // ZXUA_TS_MS_DUEDATES TT Milestone due dates
+
+// EXPORT PARAMETERS
+
+// EV_PHASE_DES        :           "", // CHAR (40) Language-Dependent Short Text
+// EV_PROJECT_ID       :           "", // CHAR (24) Project Number
+// EV_PROJECT_TYPE     :           "", // CHAR (15) Project Type
+};
+
+const result = await client.call("ZXUA_FB_PROJECT_GETDETAIL", parameters);
+
+//
+// IMPORT PARAMETERS
+//
+
+
+//
+// TABLE PARAMETERS
+//
+
+// ZXUA_TS_PHASE_VH  TT Phase ValueSet
+const ET_PHASE_VH = [];
 
 // prettier-ignore
 const ET_PHASE_VH_line = {
@@ -19,7 +53,9 @@ const ET_PHASE_VH_line = {
   RELEASE_COMPONENT                :   "", // CHAR (22) Sublandscape GUID
   RELEASE_NUMBER                   :   "", // CHAR (12) Release Number
 };
-const ET_PHASE_VH = [ET_PHASE_VH_line];
+
+// ZXUA_TS_MS_DUEDATES  TT Milestone due dates
+const ET_SPRINT_DUE_DATES = [];
 
 // prettier-ignore
 const ET_SPRINT_DUE_DATES_line = {
@@ -38,36 +74,7 @@ const ET_SPRINT_DUE_DATES_line = {
   MS_NAME                          :   "", // CHAR (40) Project Element Name
 };
 
-// ZXUA_TS_MS_DUEDATES  TT Milestone due dates
-const ET_SPRINT_DUE_DATES = [ET_SPRINT_DUE_DATES_line];
 
-// prettier-ignore
-// ADO-2 000c29598da51edc97de4a7f4529d788
-// ADO-3 000c29598da51edc9e83a2e2b764f32f
-// ADO-5 000c29598da51edc9e86f089b51a74cb
-
-(async () => {
-  try {
-    await client.connect();
-    client
-      .call("ZXUA_FB_PROJECT_GETDETAIL", {
-        PROJECT_GUID: Buffer.from("000c29598da51edc9e86f089b51a74cb", "hex"), 
-        ET_PHASE_VH: ET_PHASE_VH,
-        ET_SPRINT_DUE_DATES: ET_SPRINT_DUE_DATES,
-      })
-      .then(function (result) {
-        //console.log(result);
-        result.ET_PHASE_VH.forEach((element) => {
-          console.log( element.PARENT_DESC, element.PARENT_GUID.toString('hex'), element.TEXT, element.VALUE);
-        });
-      })
-      .catch(function (err) {
-        console.log(err);
-      })
-      .finally(function () {
-        client.close();
-      });
-  } catch (err) {
-    console.log(err);
-  }
-})();
+//
+// EXPORT PARAMETERS
+//

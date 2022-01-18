@@ -1,7 +1,7 @@
 //
-// ZXUA_CHANGE_STATUS var: 4  struct: 0  table: 3  exception: 4
+// ZXUA_CHANGE_STATUS var: 5  struct: 0  table: 3  exception: 4
 //
-// abap.js 2.3.1 at: 2022-01-17 00:27:43
+// abap.js 2.3.1 at: 2022-01-17 21:04:42
 //
 
 // prettier-ignore
@@ -11,6 +11,7 @@ const parameters = {
 
 IV_HEADER_GUID          : Buffer.alloc(~size), // RAW (16) GUID of a CRM Order Object
 IV_STATUS               :           "", // CHAR (5) Object Status
+// IV_PROCESS_TYPE      :           "", // CHAR (4) Business Transaction Type SU3=CRM_PROCESS_TYPE
 
 // TABLE PARAMETERS
 

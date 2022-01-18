@@ -4,9 +4,29 @@ const faker = require("@faker-js/faker");
 
 var client = new noderfc.Client({ ...con });
 
-var IV_RELEASE_GUID = Buffer.from("000c29598da51edc98ca64e5b452be88", "hex"); // 8000000686
+// ADO-5 000c29598da51edc9e86f089b51a74cb
+// Wave 1 000c29598da51edc9e86f089b51d74cb Wave 1 : Sprint 1 000C29598DA51EDC9E86F089B51E74CB
+// Wave 1 000c29598da51edc9e86f089b51d74cb Wave 1 : Sprint 2 000C29598DA51EDC9E86F089B51FF4CB
+// Wave 1 000c29598da51edc9e86f089b51d74cb Wave 1 : Sprint 3 000C29598DA51EDC9E86F089B52174CB
+// Wave 1 000c29598da51edc9e86f089b51d74cb Wave 1 : Sprint 4 000C29598DA51EDC9E86F089B522F4CB
+// Wave 2 000c29598da51edc9e86f089b52534cb Wave 2 : Sprint 1 000C29598DA51EDC9E86F089B52634CB
+// Wave 2 000c29598da51edc9e86f089b52534cb Wave 2 : Sprint 2 000C29598DA51EDC9E86F089B527B4CB
+// Wave 2 000c29598da51edc9e86f089b52534cb Wave 2 : Sprint 3 000C29598DA51EDC9E86F09D323694CB
+// Wave 2 000c29598da51edc9e86f089b52534cb Wave 2 : Sprint 4 000C29598DA51EDC9E86F09D323814CB
+// Wave 3 000c29598da51edc9e86f09d323a54cb Wave 3 : Sprint 1 000C29598DA51EDC9E86F09D323B54CB
+// Wave 3 000c29598da51edc9e86f09d323a54cb Wave 3 : Sprint 2 000C29598DA51EDC9E86F09D323CD4CB
+// Wave 3 000c29598da51edc9e86f09d323a54cb Wave 3 : Sprint 3 000C29598DA51EDC9E86F09D323E54CB
+// Wave 3 000c29598da51edc9e86f09d323a54cb Wave 3 : Sprint 4 000C29598DA51EDC9E86F09D323FD4CB
+// Wave 4 000c29598da51edc9e86f09d324214cb Wave 4 : Sprint 1 000C29598DA51EDC9E86F09D324314CB
+// Wave 4 000c29598da51edc9e86f09d324214cb Wave 4 : Sprint 2 000C29598DA51EDC9E86F09D324494CB
+// Wave 4 000c29598da51edc9e86f09d324214cb Wave 4 : Sprint 3 000C29598DA51EDC9E86F09D324614CB
+// Wave 4 000c29598da51edc9e86f09d324214cb Wave 4 : Sprint 4 000C29598DA51EDC9E86F09D324794CB
+
+var IV_PROJECT_ID = "ADO-5";
+var IV_WAVE_GUID = Buffer.from("000c29598da51edc9e86f089b51d74cb", "hex"); // wave 1
+var IV_SPRINT_GUID = Buffer.from("000C29598DA51EDC9E86F089B51E74CB", "hex"); // sprint 1
 var EV_GUID = Buffer.alloc(16); // Buffer.from("00000000000000000000000000000000", "hex");
-var EV_OBJECT_ID = "8000001366";
+var EV_OBJECT_ID = "8000001408";
 var IV_REQ_OWNER = "ILYAS";
 var EV_STATUS = "";
 var ET_SCOPE_ITEM = [];
@@ -31,18 +51,19 @@ const ET_PARTNER_line = {
       if (!EV_OBJECT_ID)
         await client
           .call("ZXUA_CREATE_PROCESS_TYPE", {
-            IV_PROCESS_TYPE: "SMCR",
+            IV_PROCESS_TYPE: "S1IT",
             IV_SHORT_TEXT: faker.company.catchPhrase(),
           })
           .then((result) => {
             EV_GUID = result.EV_GUID;
             EV_OBJECT_ID = result.EV_OBJECT_ID;
             console.log(result);
-            // set change cycle
+            // set PROJECT
+
             client
-              .call("ZXUA_SET_CHANGE_CYCLE", {
+              .call("ZXUA_SET_PROJECT", {
                 IV_HEADER_GUID: EV_GUID,
-                IV_RELEASE_GUID,
+                IV_PROJECT_ID: IV_PROJECT_ID,
               })
               .then((result) => {
                 console.log(result);
@@ -71,6 +92,19 @@ const ET_PARTNER_line = {
           .catch((err) => {
             console.log(err);
           });
+
+      // set PROJECT WAVE
+      client
+        .call("ZXUA_SET_PROJECT_WAVE", {
+          IV_HEADER_GUID: EV_GUID,
+          IV_WAVE_GUID: IV_WAVE_GUID,
+        })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
       // set priority
       await client
@@ -105,8 +139,8 @@ const ET_PARTNER_line = {
           .call("ZXUA_ADD_PARTNERS", {
             IV_HEADER_GUID: EV_GUID,
             IT_PARTNER: [
-              { PARTNER_NO: "112", PARTNER_FCT: "00000001" },
-              { PARTNER_NO: "112", PARTNER_FCT: "SDCR0002" },
+              { PARTNER_NO: "112", PARTNER_FCT: "/SALM/01" },
+              { PARTNER_NO: "112", PARTNER_FCT: "HT000012" },
             ],
           })
           .then((result) => {
@@ -116,6 +150,26 @@ const ET_PARTNER_line = {
             console.log(err);
           });
       }
+
+      // set work package clssiifcation
+      // work package classifcation
+      // ATTR_NAME             KEY  VALUE           SEQUENCE
+      // /SALM/GAP             G    Gap             1
+      // /SALM/WRICEF          1    WRICEF          2
+      // /SALM/FIT             F    Fit             3
+      // /SALM/NON_FUNCTIONAL  N    Non-Functional  4
+
+      await client
+        .call("ZXUA_SET_WP_CLASSIFICATION", {
+          IV_HEADER_GUID: EV_GUID,
+          IV_CLASSIF: "1",
+        })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
       // get current status
       if (!EV_STATUS)
@@ -131,11 +185,11 @@ const ET_PARTNER_line = {
             console.log(err);
           });
 
-      //E0014	VALI	Validation
+      //E0016	HSCO	Scoping
       await client
         .call("ZXUA_CHANGE_STATUS", {
           IV_HEADER_GUID: EV_GUID,
-          IV_STATUS: "E0014",
+          IV_STATUS: "E0016",
           EV_STATUS,
         })
         .then((result) => {
@@ -165,7 +219,7 @@ const ET_PARTNER_line = {
           await client
             .call("ZXUA_ADD_SCOPE_ITEM", {
               IV_HEADER_GUID: EV_GUID,
-              IV_PROCESS_TYPE: faker.helpers.randomize(["SMMJ", "SMCG"]),
+              IV_PROCESS_TYPE: faker.helpers.randomize(["S1MJ", "S1CG"]),
               IV_SHORT_TEXT: faker.company.catchPhrase(),
               EV_SCOPE_ITEM_GUID: Buffer.from("", "hex"),
             })
@@ -177,11 +231,11 @@ const ET_PARTNER_line = {
               console.log(err);
             });
 
-      //E0012	AWAP	To Be Approved
+      //E0004	APPR	Scope Finalized
       await client
         .call("ZXUA_CHANGE_STATUS", {
           IV_HEADER_GUID: EV_GUID,
-          IV_STATUS: "E0012",
+          IV_STATUS: "E0004",
         })
         .then((result) => {
           console.log(result);
@@ -189,27 +243,13 @@ const ET_PARTNER_line = {
         .catch((err) => {
           console.log(err);
         });
+      await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](5000);
 
-      // auto approval
-      await client
-        .call("ZXUA_SET_APPROVED", {
-          IV_HEADER_GUID: EV_GUID,
-        })
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](3000);
-
-      //E0015	IMPL	Being Implemented
+      //E0022	HDEV	To Be Developed
       await client
         .call("ZXUA_CHANGE_STATUS", {
           IV_HEADER_GUID: EV_GUID,
-          IV_STATUS: "E0015",
-          EV_STATUS,
+          IV_STATUS: "E0022",
         })
         .then((result) => {
           console.log(result);
@@ -235,14 +275,14 @@ const ET_PARTNER_line = {
         });
 
       // find if no SMMJ is part of scope add one.
-      const smmj1 = ET_SCOPE_ITEM.find((item) => item.PROCESS_TYPE == "SMMJ");
+      const smmj1 = ET_SCOPE_ITEM.find((item) => item.PROCESS_TYPE == "S1MJ");
       if (!smmj1) {
         console.log("run again, scope change executed.");
-        // E0011	SCEX	Extend Scope
+        // E0023	SCEX	Scope Extension
         await client
           .call("ZXUA_CHANGE_STATUS", {
             IV_HEADER_GUID: EV_GUID,
-            IV_STATUS: "E0011",
+            IV_STATUS: "E0023",
             EV_STATUS,
           })
           .then((result) => {
@@ -255,7 +295,7 @@ const ET_PARTNER_line = {
         await client
           .call("ZXUA_ADD_SCOPE_ITEM", {
             IV_HEADER_GUID: EV_GUID,
-            IV_PROCESS_TYPE: "SMMJ",
+            IV_PROCESS_TYPE: "S1MJ",
             IV_SHORT_TEXT: faker.company.catchPhrase(),
             EV_SCOPE_ITEM_GUID: Buffer.from("", "hex"),
           })
@@ -266,23 +306,11 @@ const ET_PARTNER_line = {
             console.log(err);
           });
 
-        //E0012	AWAP	To Be Approved
+        //E0004	APPR	Scope Finalized
         await client
           .call("ZXUA_CHANGE_STATUS", {
             IV_HEADER_GUID: EV_GUID,
-            IV_STATUS: "E0012",
-          })
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
-        // auto approval
-        await client
-          .call("ZXUA_SET_APPROVED", {
-            IV_HEADER_GUID: EV_GUID,
+            IV_STATUS: "E0004",
           })
           .then((result) => {
             console.log(result);
@@ -292,11 +320,11 @@ const ET_PARTNER_line = {
           });
         await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](3000);
 
-        //E0015	IMPL	Being Implemented
+        //E0022	HDEV	To Be Developed
         await client
           .call("ZXUA_CHANGE_STATUS", {
             IV_HEADER_GUID: EV_GUID,
-            IV_STATUS: "E0015",
+            IV_STATUS: "E0022",
             EV_STATUS,
           })
           .then((result) => {
@@ -305,18 +333,53 @@ const ET_PARTNER_line = {
           .catch((err) => {
             console.log(err);
           });
-
-        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](5000);
+        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](3000);
       }
 
-      // EXEC SMMJ
+      // EXEC S1MJ
       ET_SCOPE_ITEM.forEach(async (item) => {
         console.log(
           item.PROCESS_TYPE,
           item.FOLLOWONID,
           item.CREATED_GUID.toString("hex")
         );
-        if (item.PROCESS_TYPE == "SMMJ") {
+        if (item.PROCESS_TYPE == "S1MJ") {
+          // set work item classifcation
+
+          // ATTR_NAME         KEY  VALUE        SEQUENCE
+          // /SALM/WORKFLOW    W    Workflow     0
+          // /SALM/REPORT      R    Report       0
+          // /SALM/INTERFACE   I    Interface    0
+          // /SALM/CONVERSION  C    Conversion   0
+          // /SALM/ENH         E    Enhancement  0
+          // /SALM/FORMS       O    Form         0
+
+          await client
+            .call("ZXUA_SET_WP_CLASSIFICATION", {
+              IV_HEADER_GUID: item.CREATED_GUID,
+              IV_CLASSIF: "R",
+            })
+            .then((result) => {
+              console.log(result);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
+          // set PROJECT WAVE Sprint
+          client
+            .call("ZXUA_SET_PROJECT_WAVE", {
+              IV_HEADER_GUID: item.CREATED_GUID,
+              IV_WAVE_GUID: IV_SPRINT_GUID,
+            })
+            .then((result) => {
+              console.log(result);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](1000);
+
           // E0002	PROC	In Development
           await client
             .call("ZXUA_CHANGE_STATUS", {
@@ -333,21 +396,21 @@ const ET_PARTNER_line = {
           await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](3000);
 
           // create transport
-          await client
-            .call("ZXUA_ADD_TRANSPORT", {
-              IV_HEADER_GUID: item.CREATED_GUID,
-              IV_REQ_DESCR: item.OBJECT_ID_DESCR,
-              IV_REQ_OWNER: IV_REQ_OWNER,
-              IT_DEVELOPER: [],
-            })
-            .then((result) => {
-              console.log(result);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          // await client
+          //   .call("ZXUA_ADD_TRANSPORT", {
+          //     IV_HEADER_GUID: item.CREATED_GUID,
+          //     IV_REQ_DESCR: item.OBJECT_ID_DESCR,
+          //     IV_REQ_OWNER: IV_REQ_OWNER,
+          //     IT_DEVELOPER: [],
+          //   })
+          //   .then((result) => {
+          //     console.log(result);
+          //   })
+          //   .catch((err) => {
+          //     console.log(err);
+          //   });
 
-          await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](5000);
+          // await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](5000);
 
           // E0004	TOTE	To Be Tested
           await client
@@ -377,88 +440,47 @@ const ET_PARTNER_line = {
             .catch((err) => {
               console.log(err);
             });
-
-          await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](3000);
-
-          // E0011	VORA	Preliminary Import Requested
-          await client
-            .call("ZXUA_CHANGE_STATUS", {
-              IV_HEADER_GUID: item.CREATED_GUID,
-              IV_STATUS: "E0011",
-            })
-            .then((result) => {
-              console.log(result);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-
-          await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](3000);
-
-          // E0012	TIMP	Testing for Preliminary Import
-          await client
-            .call("ZXUA_CHANGE_STATUS", {
-              IV_HEADER_GUID: item.CREATED_GUID,
-              IV_STATUS: "E0012",
-            })
-            .then((result) => {
-              console.log(result);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-
-          await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](3000);
-
-          // E0013	GETP	Tested for Production Import
-          await client
-            .call("ZXUA_CHANGE_STATUS", {
-              IV_HEADER_GUID: item.CREATED_GUID,
-              IV_STATUS: "E0013",
-            })
-            .then((result) => {
-              console.log(result);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-
-          await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](3000);
-
-          // E0014	RELI	Authorized for Import
-          await client
-            .call("ZXUA_CHANGE_STATUS", {
-              IV_HEADER_GUID: item.CREATED_GUID,
-              IV_STATUS: "E0014",
-            })
-            .then((result) => {
-              console.log(result);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-
-          await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](3000);
-
-          // E0006	PROD	Imported into Production
-          // here is a condition to be maintained in SAP.
-          await client
-            .call("ZXUA_CHANGE_STATUS", {
-              IV_HEADER_GUID: item.CREATED_GUID,
-              IV_STATUS: "E0006",
-            })
-            .then((result) => {
-              console.log(result);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-
-          await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](3000);
         }
-        if (item.PROCESS_TYPE == "SMCG") {
-          // E0001 	 CREA 	 Created
-          // E0014 	 BUIL 	 In Process
+        if (item.PROCESS_TYPE == "S1CG") {
+          // set work item classifcation
+
+          // ATTR_NAME         KEY  VALUE        SEQUENCE
+          // /SALM/WORKFLOW    W    Workflow     0
+          // /SALM/REPORT      R    Report       0
+          // /SALM/INTERFACE   I    Interface    0
+          // /SALM/CONVERSION  C    Conversion   0
+          // /SALM/ENH         E    Enhancement  0
+          // /SALM/FORMS       O    Form         0
+
+          await client
+            .call("ZXUA_SET_WP_CLASSIFICATION", {
+              IV_HEADER_GUID: item.CREATED_GUID,
+              IV_CLASSIF: "R",
+            })
+            .then((result) => {
+              console.log(result);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](500);
+
+          // set PROJECT WAVE Sprint
+          client
+            .call("ZXUA_SET_PROJECT_WAVE", {
+              IV_HEADER_GUID: item.CREATED_GUID,
+              IV_WAVE_GUID: IV_SPRINT_GUID,
+            })
+            .then((result) => {
+              console.log(result);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](1000);
+
+          // E0001 	 CRTE 	 Created
+          // E0014 	 BUIL 	 In Development
           await client
             .call("ZXUA_CHANGE_STATUS", {
               IV_HEADER_GUID: item.CREATED_GUID,
@@ -470,7 +492,9 @@ const ET_PARTNER_line = {
             .catch((err) => {
               console.log(err);
             });
-          // E0012 	 TEST 	 To Be Tested
+          await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](1000);
+
+          // E0012 	 Test 	 To Be Tested
           await client
             .call("ZXUA_CHANGE_STATUS", {
               IV_HEADER_GUID: item.CREATED_GUID,
@@ -482,7 +506,10 @@ const ET_PARTNER_line = {
             .catch((err) => {
               console.log(err);
             });
-          // E0003 	 DOCU 	 To be Documented
+
+          await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](1000);
+
+          // E0003 	 DOCU 	 Successfully Tested
           await client
             .call("ZXUA_CHANGE_STATUS", {
               IV_HEADER_GUID: item.CREATED_GUID,
@@ -494,37 +521,39 @@ const ET_PARTNER_line = {
             .catch((err) => {
               console.log(err);
             });
-          // E0011 	 EVAL 	 Change Analysis
-          await client
-            .call("ZXUA_CHANGE_STATUS", {
-              IV_HEADER_GUID: item.CREATED_GUID,
-              IV_STATUS: "E0011",
-            })
-            .then((result) => {
-              console.log(result);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          // E0004 	 FAIL 	 Failed
-          // E0005 	 FINI 	 Confirmed
-          await client
-            .call("ZXUA_CHANGE_STATUS", {
-              IV_HEADER_GUID: item.CREATED_GUID,
-              IV_STATUS: "E0005",
-            })
-            .then((result) => {
-              console.log(result);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          // E0006 	 CANC 	 Canceled
-          // E0015 	 FALL 	 Restore Source
-          // E0016 	 WIDR 	 Withdrawn
         }
       });
 
+      await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](3000);
+
+      // E0024	TOTE	To Be Tested
+      // auto updated
+      // E0025	SUTE	Successfully Tested
+      await client
+        .call("ZXUA_CHANGE_STATUS", {
+          IV_HEADER_GUID: EV_GUID,
+          IV_STATUS: "E0025",
+        })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](5000);
+      //E0021	RELE	Handed Over to Release
+      await client
+        .call("ZXUA_CHANGE_STATUS", {
+          IV_HEADER_GUID: EV_GUID,
+          IV_STATUS: "E0021",
+          IV_PROCESS_TYPE: "try 2",
+        })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       console.log("end");
     })
     .catch((err) => {

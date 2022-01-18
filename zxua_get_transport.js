@@ -1,5 +1,5 @@
 //
-// ZXUA_ADD_PARTNERS var: 4  struct: 0  table: 4  exception: 3
+// ZXUA_GET_TRANSPORT var: 3  struct: 0  table: 3  exception: 3
 //
 // abap.js 2.3.1 at: 2022-01-17 21:04:42
 //
@@ -13,15 +13,13 @@ IV_HEADER_GUID          : Buffer.alloc(~size), // RAW (16) GUID of a CRM Order O
 
 // TABLE PARAMETERS
 
-IT_PARTNER              :           [], // ZXUA_IT_PARTNER Identification Data for a Partner
 // ET_EXCEPTION         :           [], // ZXUA_ET_EXCEPTION One-Order: Return Structure for Processing Several Documents
 // ET_MSG               :           [], // ZXUA_ET_MSG Application Log: Message Data
-// ET_SAVED_OBJECTS     :           [], // CRMT_RETURN_OBJECTS_STRUC Return Structure: Saved Objects
+// ET_TRANSPORT         :           [], // /TMWFLOW/TRORDHC_S Wrapper of /tmwflow/trord_n
 
 // EXPORT PARAMETERS
 
 // EV_GUID              : Buffer.alloc(~size), // RAW (16) GUID of a CRM Order Object
-// EV_OBJECT_ID         :           "", // CHAR (10) ALPHA=ALPHA Transaction ID SU3=CRM_OBJECT_ID
 // SUBRC                :            0, // INT4 (10) ABAP System Field: Return Code of ABAP Statements
 
 // EXCEPTION PARAMETERS
@@ -31,7 +29,7 @@ IT_PARTNER              :           [], // ZXUA_IT_PARTNER Identification Data f
 // SMCP_RFC_READ_FAILED            // Change Cycle Read Failed
 };
 
-const result = await client.call("ZXUA_ADD_PARTNERS", parameters);
+const result = await client.call("ZXUA_GET_TRANSPORT", parameters);
 
 //
 // IMPORT PARAMETERS
@@ -41,16 +39,6 @@ const result = await client.call("ZXUA_ADD_PARTNERS", parameters);
 //
 // TABLE PARAMETERS
 //
-
-// ZXUA_IT_PARTNER  Identification Data for a Partner
-const IT_PARTNER = [];
-
-// prettier-ignore
-const IT_PARTNER_line = {
-  PARTNER_NO                       :   "", // CHAR (10) ALPHA=ALPHA Business Partner Number SU3=BPA
-  PARTNER_GUID                     : Buffer.alloc(16), // RAW (16) Business Partner GUID
-  PARTNER_FCT                      :   "", // CHAR (8) Partner Function
-};
 
 // ZXUA_ET_EXCEPTION  One-Order: Return Structure for Processing Several Documents
 const ET_EXCEPTION = [];
@@ -88,13 +76,34 @@ const ET_MSG_line = {
   ALTEXT                           :   "", // CHAR (28) Application log: Standard text
 };
 
-// CRMT_RETURN_OBJECTS_STRUC  Return Structure: Saved Objects
-const ET_SAVED_OBJECTS = [];
+// /TMWFLOW/TRORDHC_S  Wrapper of /tmwflow/trord_n
+const ET_TRANSPORT = [];
 
 // prettier-ignore
-const ET_SAVED_OBJECTS_line = {
-  GUID                             : Buffer.alloc(16), // RAW (16) GUID of a CRM Order Object
-  OBJECT_ID                        :   "", // CHAR (10) ALPHA=ALPHA Transaction ID SU3=CRM_OBJECT_ID
+const ET_TRANSPORT_line = {
+  TASKLIST                         :   "", // CHAR (10) Task List
+  TRORDER_NUMBER                   :   "", // CHAR (20) Request/Task
+  CTS_ID                           :   "", // CHAR (32) Assigned CTS project ID
+  TRANSPORT_TRACK                  :   "", // CHAR (8) Transport Track
+  SYS_NAME                         :   "", // CHAR (8) Extended System ID
+  SYS_TYPE                         :   "", // CHAR (16) Technical System Type (ABAP, Java)
+  SYS_CLIENT                       :   "", // CHAR (3) The ABAP Client
+  RESP_USER                        :   "", // CHAR (12) User Name
+  CREATED_DATE                     :   "", // DATS (8) Created On
+  CREATED_TIME                     :   "", // TIMS (6) Creation Time
+  RELEASED_DATE                    :   "", // DATS (8) Release Date
+  RELEASED_TIME                    :   "", // TIMS (6) Release Time
+  STATUS                           :   "", // CHAR (4) Export Status
+  ORIGINATOR                       :   "", // CHAR (1) Creator of Task List
+  ORIGINATOR_ID                    :   "", // CHAR (32) ID in Creator of Task List
+  ORIGINATOR_KEY                   :   "", // CHAR (32) Key in Task List Creator
+  TRORDER_COPY                     :   "", // CHAR (20) Request/Task
+  ORIG_REQUEST                     :   "", // CHAR (20) Request/Task
+  TARGET                           :   "", // CHAR (10) Transport Target of Request
+  TRFUNCTION                       :   "", // CHAR (1) Type of request/task
+  PROJECT_NAME                     :   "", // CHAR (32) Project ID
+  TR_TEXT                          :   "", // CHAR (60) Short Description of R/3 Repository Objects
+  SMI_PROJECT                      :   "", // CHAR (10) Cycle
 };
 
 

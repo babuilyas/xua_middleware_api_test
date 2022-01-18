@@ -6,7 +6,7 @@ var client = new noderfc.Client({ ...con });
 
 var IV_RELEASE_GUID = Buffer.from("000c29598da51edc98ca64e5b452be88", "hex"); // 8000000686
 var EV_GUID = Buffer.alloc(16); // Buffer.from("00000000000000000000000000000000", "hex");
-var EV_OBJECT_ID = "8000001366";
+var EV_OBJECT_ID = "8000001415";
 var IV_REQ_OWNER = "ILYAS";
 var EV_STATUS = "";
 var ET_SCOPE_ITEM = [];
@@ -354,6 +354,7 @@ const ET_PARTNER_line = {
             .call("ZXUA_CHANGE_STATUS", {
               IV_HEADER_GUID: item.CREATED_GUID,
               IV_STATUS: "E0004",
+              IV_PROCESS_TYPE: "attempt 2",
             })
             .then((result) => {
               console.log(result);

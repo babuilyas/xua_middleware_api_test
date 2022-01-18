@@ -30,7 +30,10 @@ let tab1 = [struct1];
         RT_PROJECTS: tab1,
       })
       .then(function (result) {
-        console.log(result);
+        //console.log(result);
+        result.RT_PROJECTS.forEach((element) => {
+          console.log(element.PROJECT_ID, element.GUID.toString("hex"));
+        });
       })
       .catch(function (err) {
         console.log(err);

@@ -87,3 +87,25 @@ NW RFC Library: SDK variant, Release 750 Patch Level 8, Compiled on Apr 17 2021 
 2022-01-17 00:59:59.325442 [06196] >> Error entry
 	[Handle: 2478884420592	ConvID: 43685558	Target: slmac	SysID: SLM	SysNr: 00	User: ILYAS	Mandant: 001	Language: E	SAPRouter: /H/125.209.118.234/H/172.16.0.185	Codepage: 4103]
 	RfcCommunicationException: Return Value: 0, Code: RFC_COMMUNICATION_FAILURE, Message: no SAP ErrInfo available
+
+**** Log file opened at 2022-01-18 19:30:07.166768 UTC+05:00 (Pakistan Standard Time), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 8, Compiled on Apr 17 2021 03:23:42
+ CPIC library: 753.2020.03.230 version 3, NI library: 40, Kernel Release: 753 Patch Level 814
+ Current working directory: c:\Users\m.ilyas\Desktop\xua_middleware_api_test, Program: node
+ Hardware: PC with Windows NT 4x AMD64 Level 6 (Mod 142 Step 9), Operating_system: Windows NT 10.0
+ Hostname: DESKTOP-3J4CPO4, IP address: 192.168.1.191, IPv6 address: fe80::c420:b191:df6b:85be
+
+2022-01-18 19:30:07.169557 [22636] >> Error entry
+	[Handle: 2484735482768	ConvID: 95841814	Target: slmac	SysID: SLM	SysNr: 00	User: ILYAS	Mandant: 001	Language: E	SAPRouter: /H/125.209.118.234/H/172.16.0.185	Codepage: 4103]
+	RfcCommunicationException: Return Value: 0, Code: RFC_COMMUNICATION_FAILURE, Message: no SAP ErrInfo available
+
+**** Log file opened at 2022-01-18 19:31:41.590498 UTC+05:00 (Pakistan Standard Time), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 8, Compiled on Apr 17 2021 03:23:42
+ CPIC library: 753.2020.03.230 version 3, NI library: 40, Kernel Release: 753 Patch Level 814
+ Current working directory: c:\Users\m.ilyas\Desktop\xua_middleware_api_test, Program: node
+ Hardware: PC with Windows NT 4x AMD64 Level 6 (Mod 142 Step 9), Operating_system: Windows NT 10.0
+ Hostname: DESKTOP-3J4CPO4, IP address: 192.168.1.191, IPv6 address: fe80::c420:b191:df6b:85be
+
+2022-01-18 19:31:41.590668 [22192] >> Error entry
+	[Handle: 2066419457840	ConvID: 95983500	Target: slmac	SysID: SLM	SysNr: 00	User: ILYAS	Mandant: 001	Language: E	SAPRouter: /H/125.209.118.234/H/172.16.0.185	Codepage: 4103]
+	RfcCommunicationException: Return Value: 0, Code: RFC_COMMUNICATION_FAILURE, Message: no SAP ErrInfo available

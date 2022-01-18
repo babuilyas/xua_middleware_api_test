@@ -1,7 +1,7 @@
 //
 // ZXUA_GET_PARTNERS var: 2  struct: 0  table: 4  exception: 3
 //
-// abap.js 2.3.1 at: 2022-01-17 00:27:43
+// abap.js 2.3.1 at: 2022-01-17 21:04:42
 //
 
 // prettier-ignore
