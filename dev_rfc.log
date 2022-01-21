@@ -109,3 +109,55 @@ NW RFC Library: SDK variant, Release 750 Patch Level 8, Compiled on Apr 17 2021 
 2022-01-18 19:31:41.590668 [22192] >> Error entry
 	[Handle: 2066419457840	ConvID: 95983500	Target: slmac	SysID: SLM	SysNr: 00	User: ILYAS	Mandant: 001	Language: E	SAPRouter: /H/125.209.118.234/H/172.16.0.185	Codepage: 4103]
 	RfcCommunicationException: Return Value: 0, Code: RFC_COMMUNICATION_FAILURE, Message: no SAP ErrInfo available
+
+**** Log file opened at 2022-01-21 18:36:32.040323 UTC+05:00 (Pakistan Standard Time), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 8, Compiled on Apr 17 2021 03:23:42
+ CPIC library: 753.2020.03.230 version 3, NI library: 40, Kernel Release: 753 Patch Level 814
+ Current working directory: c:\Users\m.ilyas\Desktop\xua_middleware_api_test, Program: node
+ Hardware: PC with Windows NT 4x AMD64 Level 6 (Mod 142 Step 9), Operating_system: Windows NT 10.0
+ Hostname: DESKTOP-3J4CPO4, IP address: 192.168.1.191, IPv6 address: fe80::c420:b191:df6b:85be
+
+2022-01-21 18:36:32.040901 [23428] >> Error entry
+	[Handle: 2840244205072	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host DESKTOP-3J4CPO4 with Unicode
+ERROR       partner '125.209.118.234:3299' not reached
+TIME        Fri Jan 21 18:36:32 2022
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 125.209.118.234:3299
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+
+**** Log file opened at 2022-01-21 18:37:21.074268 UTC+05:00 (Pakistan Standard Time), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 8, Compiled on Apr 17 2021 03:23:42
+ CPIC library: 753.2020.03.230 version 3, NI library: 40, Kernel Release: 753 Patch Level 814
+ Current working directory: c:\Users\m.ilyas\Desktop\xua_middleware_api_test, Program: node
+ Hardware: PC with Windows NT 4x AMD64 Level 6 (Mod 142 Step 9), Operating_system: Windows NT 10.0
+ Hostname: DESKTOP-3J4CPO4, IP address: 192.168.1.191, IPv6 address: fe80::c420:b191:df6b:85be
+
+2022-01-21 18:37:21.075206 [09004] >> Error entry
+	[Handle: 2822562211872	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host DESKTOP-3J4CPO4 with Unicode
+ERROR       partner '125.209.118.234:3299' not reached
+TIME        Fri Jan 21 18:37:21 2022
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 125.209.118.234:3299
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
